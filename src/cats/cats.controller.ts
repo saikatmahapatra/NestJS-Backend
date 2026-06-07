@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
@@ -15,6 +15,11 @@ export class CatsController {
   @Get()
   findAll() {
     return this.catsService.findAll();
+  }
+
+  @Get('breed')
+  findByBreed(@Query('b') breed: string, @Query('c') color?: string) {
+    return 'Your cats breed is ' + breed + ' and color is ' + color;
   }
 
   @Get(':id')
